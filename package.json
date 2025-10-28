@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-cliqnodetest",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "This is an n8n community node. It lets you use Zoho Cliq in your n8n workflows.",
     "license": "MIT",
     "homepage": "",
@@ -15,15 +15,15 @@
         "type": "git",
         "url": "https://github.com/Integrations-dev/n8n-nodes-cliqnodetest.git"
     },
-   "scripts": {
-		"build": "n8n-node build",
-		"build:watch": "tsc --watch",
-		"dev": "n8n-node dev",
-		"lint": "n8n-node lint",
-		"lint:fix": "n8n-node lint --fix",
-		"release": "n8n-node release",
-		"prepublishOnly": "n8n-node prerelease"
-	},
+    "scripts": {
+        "build": "n8n-node build",
+        "build:watch": "tsc --watch",
+        "dev": "n8n-node dev",
+        "lint": "n8n-node lint",
+        "lint:fix": "n8n-node lint --fix",
+        "release": "n8n-node release",
+        "prepublishOnly": "n8n-node prerelease"
+    },
     "files": [
         "dist"
     ],
