@@ -1,6 +1,6 @@
 import type { INodeProperties } from "n8n-workflow";
 
-export const otherOperations: INodeProperties[] = [
+export const channelOperations: INodeProperties[] = [
     {
         displayName: 'Operation',
         name: 'operation',
@@ -9,17 +9,11 @@ export const otherOperations: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: [
-                    'Others',
+                    'Channel',
                 ],
             },
         },
         options: [
-            {
-                name: 'Update Thread State',
-                value: 'updateThreadState',
-                action: 'Update Thread State',
-                description: 'Update the state of a thread (close/ reopen)',
-            },
             {
                 name: 'Add bot to channel',
                 value: 'addBotToChannel',
@@ -68,53 +62,12 @@ export const otherOperations: INodeProperties[] = [
                 action: 'Fetch Team',
                 description: 'Fetch details of a specific team',
             },
-            {
-                name: 'Pin message',
-                value: 'pinMessage',
-                action: 'Pin message',
-                description: 'Pin a message in a channel',
-            }
         ],
         default: '',
     },
 ]
 
-export const otherFields: INodeProperties[] = [
-    {
-        displayName: 'Team',
-        name: 'team',
-        type: 'options',
-        noDataExpression: true,
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ["Others"],
-                operation: ['fetchTeam'],
-            },
-        },
-        options: [], // Placeholder for dynamically fetched teams
-        default: '',
-        typeOptions: {
-            loadOptionsMethod: 'getTeams',
-        },
-        description: 'Select the team to perform the action on.',
-        placeholder: "Select a team"
-    },
-    {
-        displayName: 'Team ID',
-        name: 'teamId',
-        type: 'string',
-        required: true,
-        placeholder: "Enter a team ID",
-        displayOptions: {
-            show: {
-                resource: ["Others"],
-                operation: ['fetchTeam'],
-                team: ['Custom_Team_Selected'],
-            },
-        },
-        default: '',
-    },
+export const channelFields: INodeProperties[] = [
     {
         displayName: 'Channel',
         name: 'channel',
@@ -124,7 +77,7 @@ export const otherFields: INodeProperties[] = [
         noDataExpression: true,
         displayOptions: {
             show: {
-                resource: ["Others"],
+                resource: ["Channel"],
                 operation: ['Channel', 'ChannelAsBot', 'Thread', "addUsersToChannel", 'removeChannelMember', 'archiveChannel', 'deleteChannel', 'fetchChannel', 'unarchiveChannel', 'updateChannel'],
             },
         },
@@ -143,7 +96,7 @@ export const otherFields: INodeProperties[] = [
         noDataExpression: true,
         displayOptions: {
             show: {
-                resource: ["Others"],
+                resource: ["Channel"],
                 operation: ['addBotToChannel'],
             },
         },
@@ -161,7 +114,7 @@ export const otherFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ["Others"],
+                resource: ["Channel"],
                 operation: ['addBotToChannel'],
                 channel: ['Custom_Channel_Selected'],
             },
@@ -175,7 +128,7 @@ export const otherFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['addBotToChannel'],
             },
         },
@@ -192,142 +145,11 @@ export const otherFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 channel: ['Custom_Channel_Selected'],
-                resource: ["Others"],
+                resource: ["Channel"],
                 operation: ['Channel', "ChannelAsBot", "Thread", 'addUsersToChannel', 'removeChannelMember', 'archiveChannel', 'deleteChannel', 'fetchChannel', 'unarchiveChannel', 'updateChannel'],
             },
         },
         default: '',
-    },
-
-    {
-        displayName: "Chat",
-        name: 'chat',
-        required: true,
-        type: 'options',
-        noDataExpression: true,
-        placeholder: "Select a chat",
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Chat', 'pinMessage'],
-            },
-        },
-        options: [], // Placeholder for dynamically fetched chats
-        default: '',
-        typeOptions: {
-            loadOptionsMethod: 'getChats',
-        },
-    },
-    {
-        displayName: "Chat ID",
-        name: 'customChatId',
-        required: true,
-        placeholder: "Enter the chat ID",
-        type: 'string',
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Chat', 'pinMessage'],
-                chat: ['Custom_Chat_Selected'],
-            },
-        },
-        default: '',
-    },
-
-    //Create Thread
-    {
-        displayName: 'Message ID',
-        name: 'messageId',
-        type: 'string',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Thread', 'pinMessage'],
-            },
-        },
-        default: '',
-        placeholder: 'Enter the message ID',
-    },
-    {
-        displayName: 'Expiry Time',
-        name: 'expiryTime',
-        type: 'options',
-        placeholder: "Select a expiry time",
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['pinMessage'],
-            },
-        },
-        options: [
-            {
-                name: 'Forever',
-                value: -1,
-            },
-            {
-                name: '1 Hour',
-                value: 3600000,
-            },
-            {
-                name: '2 Hours',
-                value: 7200000,
-            },
-            {
-                name: '4 Hours',
-                value: 14400000,
-            },
-            {
-                name: '8 Hours',
-                value: 28800000,
-            },
-            {
-                name: '12 Hours',
-                value: 43200000,
-            },
-            {
-                name: '1 Day',
-                value: 86400000,
-            },
-            {
-                name: '1 Week',
-                value: 604800000,
-            },
-            {
-                name: 'Custom',
-                value: 'custom',
-            }
-        ],
-        default: -1,
-    },
-    {
-        displayName: 'Expiry Time in Milliseconds',
-        name: 'time',
-        type: 'string',
-        required: true,
-        placeholder: "Enter the expiry time",
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['pinMessage'],
-                expiryTime: ['custom']
-            },
-        },
-        default: '',
-    },
-    {
-        displayName: 'Notify Members',
-        name: 'notify',
-        type: 'boolean',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['pinMessage'],
-            },
-        },
-        default: false,
     },
 
     {
@@ -337,7 +159,7 @@ export const otherFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['createChannel', 'updateChannel'],
             },
         },
@@ -350,7 +172,7 @@ export const otherFields: INodeProperties[] = [
         type: 'string',
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['createChannel', 'updateChannel'],
             },
         },
@@ -365,7 +187,7 @@ export const otherFields: INodeProperties[] = [
         placeholder: "Select the type of channel",
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['createChannel', 'updateChannel'],
             },
         },
@@ -397,7 +219,7 @@ export const otherFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['createChannel', 'updateChannel'],
                 level: ['team'],
             },
@@ -415,7 +237,7 @@ export const otherFields: INodeProperties[] = [
         type: 'string',
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Channel'],
                 operation: ['createChannel', 'updateChannel'],
                 level: ['private', 'external', 'organization'],
             },
@@ -436,42 +258,5 @@ export const otherFields: INodeProperties[] = [
         description: 'Set whether the channel is visible to everyone in the organization/ Team.',
     },
 
-    {
-        displayName: 'Thread Chat Id',
-        name: 'threadChatId',
-        type: 'string',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['updateThreadState'],
-            },
-        },
-        default: '',
-        placeholder: 'Enter the thread chat ID',
-    },
-    {
-        displayName: 'Thread status',
-        name: 'state',
-        type: 'options',
-        required: true,
-        placeholder: "Select the thread action",
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['updateThreadState'],
-            },
-        },
-        options: [
-            {
-                name: 'Close',
-                value: 'close',
-            },
-            {
-                name: 'Reopen',
-                value: 'reopen',
-            }
-        ],
-        default: '',
-    }
+    
 ]

@@ -43,6 +43,18 @@ export const messageOperations: INodeProperties[] = [
                 value: 'Thread',
                 action: 'Create a thread',
                 description: 'Create a thread in a channel',
+            },
+            {
+                name: 'Update Thread State',
+                value: 'updateThreadState',
+                action: 'Update Thread State',
+                description: 'Update the state of a thread (close/ reopen)',
+            },
+            {
+                name: 'Pin message',
+                value: 'pinMessage',
+                action: 'Pin message',
+                description: 'Pin a message in a channel',
             }
         ],
         default: '',
@@ -339,5 +351,175 @@ export const messageFields: INodeProperties[] = [
         },
         default: false,
         description: `If enabled, the Message ID will be returned in the response.`,
+    },
+
+    {
+        displayName: 'Thread Chat Id',
+        name: 'threadChatId',
+        type: 'string',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['updateThreadState'],
+            },
+        },
+        default: '',
+        placeholder: 'Enter the thread chat ID',
+    },
+    {
+        displayName: 'Thread status',
+        name: 'state',
+        type: 'options',
+        required: true,
+        placeholder: "Select the thread action",
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['updateThreadState'],
+            },
+        },
+        options: [
+            {
+                name: 'Close',
+                value: 'close',
+            },
+            {
+                name: 'Reopen',
+                value: 'reopen',
+            }
+        ],
+        default: '',
+    },
+
+        {
+        displayName: "Chat",
+        name: 'chat',
+        required: true,
+        type: 'options',
+        noDataExpression: true,
+        placeholder: "Select a chat",
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['Chat', 'pinMessage'],
+            },
+        },
+        options: [], // Placeholder for dynamically fetched chats
+        default: '',
+        typeOptions: {
+            loadOptionsMethod: 'getChats',
+        },
+    },
+    {
+        displayName: "Chat ID",
+        name: 'customChatId',
+        required: true,
+        placeholder: "Enter the chat ID",
+        type: 'string',
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['Chat', 'pinMessage'],
+                chat: ['Custom_Chat_Selected'],
+            },
+        },
+        default: '',
+    },
+
+    //Create Thread
+    {
+        displayName: 'Message ID',
+        name: 'messageId',
+        type: 'string',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['Thread', 'pinMessage'],
+            },
+        },
+        default: '',
+        placeholder: 'Enter the message ID',
+    },
+    {
+        displayName: 'Expiry Time',
+        name: 'expiryTime',
+        type: 'options',
+        placeholder: "Select a expiry time",
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['pinMessage'],
+            },
+        },
+        options: [
+            {
+                name: 'Forever',
+                value: -1,
+            },
+            {
+                name: '1 Hour',
+                value: 3600000,
+            },
+            {
+                name: '2 Hours',
+                value: 7200000,
+            },
+            {
+                name: '4 Hours',
+                value: 14400000,
+            },
+            {
+                name: '8 Hours',
+                value: 28800000,
+            },
+            {
+                name: '12 Hours',
+                value: 43200000,
+            },
+            {
+                name: '1 Day',
+                value: 86400000,
+            },
+            {
+                name: '1 Week',
+                value: 604800000,
+            },
+            {
+                name: 'Custom',
+                value: 'custom',
+            }
+        ],
+        default: -1,
+    },
+    {
+        displayName: 'Expiry Time in Milliseconds',
+        name: 'time',
+        type: 'string',
+        required: true,
+        placeholder: "Enter the expiry time",
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['pinMessage'],
+                expiryTime: ['custom']
+            },
+        },
+        default: '',
+    },
+    {
+        displayName: 'Notify Members',
+        name: 'notify',
+        type: 'boolean',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Others'],
+                operation: ['pinMessage'],
+            },
+        },
+        default: false,
     },
 ]

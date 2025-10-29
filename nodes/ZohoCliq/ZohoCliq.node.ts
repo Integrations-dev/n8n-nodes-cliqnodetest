@@ -12,11 +12,13 @@ import {
 
 import { messageFields, messageOperations } from './resources/MessageResource';
 import { userFields, userOperations } from './resources/UsersResource';
-import { otherFields, otherOperations } from './resources/OthersResource';
+import { channelFields, channelOperations } from './resources/ChannelResource';
+import { teamFields, teamOperations } from './resources/TeamResource';
+
 
 export class ZohoCliq implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Zoho Cliq Content Change',
+        displayName: 'Zoho Cliqq',
         name: 'zohoCliq_content_change',
         icon: 'file:cliq.svg',
         group: ['transform'],
@@ -51,8 +53,12 @@ export class ZohoCliq implements INodeType {
                         value: 'Users',
                     },
                     {
-                        name: 'Other',
-                        value: 'Others',
+                        name: 'Channel',
+                        value: 'Channel',
+                    },
+                    {
+                        name: 'Team',
+                        value: 'Team'
                     }
                 ],
                 default: 'Message',
@@ -66,8 +72,11 @@ export class ZohoCliq implements INodeType {
             ...userOperations,
             ...userFields,
 
-            ...otherOperations,
-            ...otherFields
+            ...channelOperations,
+            ...channelFields,
+
+            ...teamOperations,
+            ...teamFields,
         ],
 		usableAsTool: true
     };
