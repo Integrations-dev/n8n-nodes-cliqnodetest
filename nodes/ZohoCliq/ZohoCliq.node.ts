@@ -16,8 +16,8 @@ import { otherFields, otherOperations } from './resources/OthersResource';
 
 export class ZohoCliq implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Zoho Cliq',
-        name: 'zohoCliq',
+        displayName: 'Zoho Cliq Content Change',
+        name: 'zohoCliq_content_change',
         icon: 'file:cliq.svg',
         group: ['transform'],
         version: 1,
