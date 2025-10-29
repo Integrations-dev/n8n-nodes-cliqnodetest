@@ -57,11 +57,18 @@ export const channelOperations: INodeProperties[] = [
                 description: 'Update details of a specific channel',
             },
             {
-                name: 'Fetch Team',
-                value: 'fetchTeam',
-                action: 'Fetch Team',
-                description: 'Fetch details of a specific team',
+                name: `Add channel members`,
+                value: 'addUsersToChannel',
+                action: `Add channel members`,
+                description: 'Add users to a channel',
             },
+            {
+                name: 'Remove channel members',
+                value: 'removeChannelMember',
+                action: 'Remove channel member',
+                description: 'Remove a member from a channel',
+            },
+            
         ],
         default: '',
     },
@@ -258,5 +265,18 @@ export const channelFields: INodeProperties[] = [
         description: 'Set whether the channel is visible to everyone in the organization/ Team.',
     },
 
-    
+    {
+        displayName: 'Email IDs/ ZUIDs',
+        name: 'userEmails',
+        type: 'string',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Channel'],
+                operation: ['addUsersToChannel', 'removeChannelMember'],
+            },
+        },
+        default: '',
+        placeholder: 'zylker@zoho.com,tim.harrison@zylker.com'
+    },
 ]

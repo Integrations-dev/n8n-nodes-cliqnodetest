@@ -18,7 +18,7 @@ import { teamFields, teamOperations } from './resources/TeamResource';
 
 export class ZohoCliq implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Zoho Cliqq',
+        displayName: 'Zoho Cliq ( As Per In-App Content )',
         name: 'zohoCliq_content_change',
         icon: 'file:cliq.svg',
         group: ['transform'],
@@ -429,7 +429,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'PUT', `api/v2/statuses/${status}/set`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Users' && operation === 'addUsersToChannel') {
+                } else if (resource === 'Channel' && operation === 'addUsersToChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
@@ -450,7 +450,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels/${channel_id}/members`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Users' && operation === 'removeChannelMember') {
+                } else if (resource === 'Channel' && operation === 'removeChannelMember') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
@@ -473,7 +473,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'DELETE', `api/v2/channels/${channel_id}/members`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'addBotToChannel') {
+                } else if (resource === 'Channel' && operation === 'addBotToChannel') {
                     const botUniqueName = this.getNodeParameter('botUniqueName', i, '') as string;
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelUniquename = this.getNodeParameter('customChannelId', i, '') as string;
@@ -494,7 +494,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/bots/${botUniqueName}/associate`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'archiveChannel') {
+                } else if (resource === 'Channel' && operation === 'archiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     let channel_id = "";
@@ -510,7 +510,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels/${channel_id}/archive`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'deleteChannel') {
+                } else if (resource === 'Channel' && operation === 'deleteChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     let channel_id = "";
@@ -526,7 +526,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'DELETE', `api/v2/channels/${channel_id}`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'unarchiveChannel') {
+                } else if (resource === 'Channel' && operation === 'unarchiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     let channel_id = "";
@@ -542,7 +542,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels/${channel_id}/unarchive`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'fetchChannel') {
+                } else if (resource === 'Channel' && operation === 'fetchChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     let channel_id = "";
@@ -559,7 +559,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'GET', `api/v2/channels/${channel_id}`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'fetchTeam') {
+                } else if (resource === 'Team' && operation === 'fetchTeam') {
                     const team = this.getNodeParameter('team', i, '') as string;
                     const teamId = this.getNodeParameter('teamId', i, '') as string;
                     let team_id = "";
@@ -575,7 +575,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'GET', `api/v2/teams/${team_id}`, {});
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'pinMessage') {
+                } else if (resource === 'Message' && operation === 'pinMessage') {
                     const chat = this.getNodeParameter('chat', i, '') as string;
                     const expiry_time = this.getNodeParameter('time', i, '') as string;
                     const preDefinedTime = this.getNodeParameter('expiryTime', i, '') as string;
@@ -584,16 +584,16 @@ export class ZohoCliq implements INodeType {
                     const messageId = this.getNodeParameter('messageId', i) as string;
                     let expiryTime = expiry_time ? expiry_time : preDefinedTime;
 
+                    console.log("Expiry Time : " + expiryTime);
+
                     // Get current timestamp in milliseconds
                     const currentTime = Date.now(); // already in milliseconds
 
-                    if (expiryTime && expiryTime !== 'indefinite') {
+                    if (expiryTime && expiryTime !== 'indefinite' && expiryTime !== "-1") {
                         // Ensure expiryTime is treated as milliseconds
                         const expiryMillis = parseInt(expiryTime);
                         const newExpiryTime = currentTime + expiryMillis;
                         expiryTime = newExpiryTime + ""; // convert to string if needed
-                    } else {
-                        throw new NodeOperationError(this.getNode(),'You must provide a valid expiry time.');
                     }
 
                     const chat_id = customChatId ? customChatId : chat;
@@ -613,7 +613,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/chats/${chat_id}/stickymessage`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'createChannel') {
+                } else if (resource === 'Channel' && operation === 'createChannel') {
                     const channelName = this.getNodeParameter('channelName', i, '') as string;
                     const channelDescription = this.getNodeParameter('channelDescription', i, '') as string;
                     const level = this.getNodeParameter('level', i, '') as string;
@@ -645,7 +645,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'updateChannel') {
+                } else if (resource === 'Channel' && operation === 'updateChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const channelName = this.getNodeParameter('channelName', i, '') as string;
@@ -688,7 +688,7 @@ export class ZohoCliq implements INodeType {
                     const responseData = await CliqApiRequest.call(this, 'PUT', `api/v2/channels/${channel_id}`, body);
                     console.log(responseData);
                     returnData.push(responseData);
-                } else if (resource === 'Others' && operation === 'updateThreadState') {
+                } else if (resource === 'Message' && operation === 'updateThreadState') {
                     const threadChatId = this.getNodeParameter('threadChatId', i, '') as string;
                     const state = this.getNodeParameter('state', i, '') as string;
                     const queryString: IDataObject = {};

@@ -392,56 +392,7 @@ export const messageFields: INodeProperties[] = [
         default: '',
     },
 
-        {
-        displayName: "Chat",
-        name: 'chat',
-        required: true,
-        type: 'options',
-        noDataExpression: true,
-        placeholder: "Select a chat",
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Chat', 'pinMessage'],
-            },
-        },
-        options: [], // Placeholder for dynamically fetched chats
-        default: '',
-        typeOptions: {
-            loadOptionsMethod: 'getChats',
-        },
-    },
-    {
-        displayName: "Chat ID",
-        name: 'customChatId',
-        required: true,
-        placeholder: "Enter the chat ID",
-        type: 'string',
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Chat', 'pinMessage'],
-                chat: ['Custom_Chat_Selected'],
-            },
-        },
-        default: '',
-    },
-
     //Create Thread
-    {
-        displayName: 'Message ID',
-        name: 'messageId',
-        type: 'string',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Others'],
-                operation: ['Thread', 'pinMessage'],
-            },
-        },
-        default: '',
-        placeholder: 'Enter the message ID',
-    },
     {
         displayName: 'Expiry Time',
         name: 'expiryTime',
@@ -450,14 +401,14 @@ export const messageFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Message'],
                 operation: ['pinMessage'],
             },
         },
         options: [
             {
                 name: 'Forever',
-                value: -1,
+                value: "-1",
             },
             {
                 name: '1 Hour',
@@ -492,7 +443,7 @@ export const messageFields: INodeProperties[] = [
                 value: 'custom',
             }
         ],
-        default: -1,
+        default: "-1",
     },
     {
         displayName: 'Expiry Time in Milliseconds',
@@ -502,7 +453,7 @@ export const messageFields: INodeProperties[] = [
         placeholder: "Enter the expiry time",
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Message'],
                 operation: ['pinMessage'],
                 expiryTime: ['custom']
             },
@@ -516,7 +467,7 @@ export const messageFields: INodeProperties[] = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['Others'],
+                resource: ['Message'],
                 operation: ['pinMessage'],
             },
         },

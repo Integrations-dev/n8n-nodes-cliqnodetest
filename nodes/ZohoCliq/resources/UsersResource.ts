@@ -33,18 +33,6 @@ export const userOperations: INodeProperties[] = [
                 action: 'Set user status',
                 description: 'Set status for a user',
             },
-            {
-                name: `Add channel members`,
-                value: 'addUsersToChannel',
-                action: `Add channel members`,
-                description: 'Add users to a channel',
-            },
-            {
-                name: 'Remove channel members',
-                value: 'removeChannelMember',
-                action: 'Remove channel member',
-                description: 'Remove a member from a channel',
-            },
         ],
         default: '',
     },
@@ -167,22 +155,6 @@ export const userFields: INodeProperties[] = [
         typeOptions: {
             loadOptionsMethod: 'getUserStatuses',
         },
-    },
-
-    // Add/ Remove Users to Channel
-    {
-        displayName: 'Email IDs/ ZUIDs',
-        name: 'userEmails',
-        type: 'string',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Users'],
-                operation: ['addUsersToChannel', 'removeChannelMember'],
-            },
-        },
-        default: '',
-        placeholder: 'zylker@zoho.com,tim.harrison@zylker.com'
     },
 
 ]
