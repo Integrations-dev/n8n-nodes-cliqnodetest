@@ -15,7 +15,10 @@ export default [
             'n8n-nodes-base/node-param-display-name-miscased-id': 'off',
             'n8n-nodes-base/node-param-description-excess-final-period': 'off',
             'n8n-nodes-base/node-param-description-unneeded-backticks': 'off',
-            'n8n-nodes-base/node-param-default-wrong-for-options': 'off'
+            // 'n8n-nodes-base/node-param-default-wrong-for-options': 'off'
+
+
+            'n8n-nodes-base/node-filename-against-convention' : 'off'
 		},
 	},
 ];

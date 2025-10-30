@@ -19,7 +19,7 @@ import { teamFields, teamOperations } from './resources/TeamResource';
 export class ZohoCliq implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Zoho Cliq ( As Per In-App Content )',
-        name: 'zohoCliq_content_change',
+        name: 'zohoCliqInapp',
         icon: 'file:cliq.svg',
         group: ['transform'],
         version: 1,
