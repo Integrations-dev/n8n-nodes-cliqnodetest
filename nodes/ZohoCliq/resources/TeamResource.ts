@@ -17,12 +17,11 @@ export const teamOperations: INodeProperties[] = [
             {
                 name: 'Fetch Team',
                 value: 'fetchTeam',
-                action: 'Fetch Team',
+                action: 'Fetch team',
                 description: 'Fetch details of a specific team',
             }
-
         ],
-        default: '',
+        default: 'fetchTeam',
     }
 ]
 
@@ -45,7 +44,7 @@ export const teamFields: INodeProperties[] = [
         typeOptions: {
             loadOptionsMethod: 'getTeams',
         },
-        description: 'Select the team to perform the action on.',
+        description: 'Select the team to perform the action on',
         placeholder: "Select a team"
     },
     {

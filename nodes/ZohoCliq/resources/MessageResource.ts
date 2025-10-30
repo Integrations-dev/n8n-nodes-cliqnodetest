@@ -39,7 +39,7 @@ export const messageOperations: INodeProperties[] = [
                 description: 'Send message to a user chat',
             },
             {
-                name: 'Create a thread',
+                name: 'Create a Thread',
                 value: 'Thread',
                 action: 'Create a thread',
                 description: 'Create a thread in a channel',
@@ -47,17 +47,17 @@ export const messageOperations: INodeProperties[] = [
             {
                 name: 'Update Thread State',
                 value: 'updateThreadState',
-                action: 'Update Thread State',
+                action: 'Update thread state',
                 description: 'Update the state of a thread (close/ reopen)',
             },
             {
-                name: 'Pin message',
+                name: 'Pin Message',
                 value: 'pinMessage',
                 action: 'Pin message',
                 description: 'Pin a message in a channel',
             }
         ],
-        default: '',
+        default: 'Channel',
     },
 ]
 
@@ -108,8 +108,8 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: '',
-        placeholder: `Enter the bot's unique name`,
-        description: `Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.`,
+        placeholder: 'Enter the bot\'s unique name',
+        description: 'Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.',
     },
     {
         displayName: "User",
@@ -273,7 +273,7 @@ export const messageFields: INodeProperties[] = [
         placeholder: 'Enter card title',
     },
     {
-        displayName: 'Card thumbnail URL',
+        displayName: 'Card Thumbnail URL',
         name: 'cardThumbnailURL',
         type: 'string',
         displayOptions: {
@@ -287,7 +287,7 @@ export const messageFields: INodeProperties[] = [
         default: '',
     },
     {
-        displayName: 'Card icon URL',
+        displayName: 'Card Icon URL',
         name: 'cardIconURL',
         type: 'string',
         displayOptions: {
@@ -327,7 +327,7 @@ export const messageFields: INodeProperties[] = [
         default: '',
     },
     {
-        displayName: 'Post in parent channel',
+        displayName: 'Post in Parent Channel',
         name: 'postInChannel',
         type: 'boolean',
         displayOptions: {
@@ -337,7 +337,7 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'If enabled, the parent channel will be notified about this thread creation.',
+        description: 'If enabled, the parent channel will be notified about this thread creation',
     },
     {
         displayName: 'Sync Message',
@@ -350,11 +350,11 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: `If enabled, the Message ID will be returned in the response.`,
+        description: 'If enabled, the Message ID will be returned in the response',
     },
 
     {
-        displayName: 'Thread Chat Id',
+        displayName: 'Thread Chat ID',
         name: 'threadChatId',
         type: 'string',
         required: true,
@@ -368,7 +368,7 @@ export const messageFields: INodeProperties[] = [
         placeholder: 'Enter the thread chat ID',
     },
     {
-        displayName: 'Thread status',
+        displayName: 'Thread Status',
         name: 'state',
         type: 'options',
         required: true,
@@ -389,7 +389,7 @@ export const messageFields: INodeProperties[] = [
                 value: 'reopen',
             }
         ],
-        default: '',
+        default: 'close',
     },
 
     //Create Thread

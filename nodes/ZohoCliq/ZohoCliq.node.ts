@@ -3,6 +3,7 @@ import { INodeType, INodeTypeDescription, NodeConnectionType, ILoadOptionsFuncti
 import {
     CliqApiRequest,
     getTeamsList,
+    getTeamsListWithoutCustom,
     getChannelsWithUniqueNameList,
     getChannelsList,
     getChatsList,
@@ -85,6 +86,10 @@ export class ZohoCliq implements INodeType {
         loadOptions: {
             async getTeams(this: ILoadOptionsFunctions) {
                 return getTeamsList.call(this);
+            },
+
+            async getTeamsWithoutCustom(this: ILoadOptionsFunctions) {
+                return getTeamsListWithoutCustom.call(this);
             },
 
             async getChannels(this: ILoadOptionsFunctions) {

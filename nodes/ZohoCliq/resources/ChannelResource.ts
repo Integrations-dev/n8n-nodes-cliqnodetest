@@ -15,43 +15,43 @@ export const channelOperations: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Add bot to channel',
+                name: 'Add Bot to Channel',
                 value: 'addBotToChannel',
                 action: 'Add bot to channel',
                 description: 'Add a bot to a channel',
             },
             {
-                name: 'Archive channel',
+                name: 'Archive Channel',
                 value: 'archiveChannel',
                 action: 'Archive channel',
                 description: 'Archive a channel',
             },
             {
-                name: 'Create channel',
+                name: 'Create Channel',
                 value: 'createChannel',
                 action: 'Create channel',
                 description: 'Create a new channel',
             },
             {
-                name: 'Delete channel',
+                name: 'Delete Channel',
                 value: 'deleteChannel',
                 action: 'Delete channel',
                 description: 'Delete a channel',
             },
             {
-                name: 'Fetch channel',
+                name: 'Fetch Channel',
                 value: 'fetchChannel',
                 action: 'Fetch channel',
                 description: 'Fetch details of a specific channel',
             },
             {
-                name: 'Unarchive channel',
+                name: 'Unarchive Channel',
                 value: 'unarchiveChannel',
                 action: 'Unarchive channel',
                 description: 'Unarchive a channel',
             },
             {
-                name: 'Update channel',
+                name: 'Update Channel',
                 value: 'updateChannel',
                 action: 'Update channel',
                 description: 'Update details of a specific channel',
@@ -63,14 +63,14 @@ export const channelOperations: INodeProperties[] = [
                 description: 'Add users to a channel',
             },
             {
-                name: 'Remove channel members',
+                name: 'Remove Channel Members',
                 value: 'removeChannelMember',
                 action: 'Remove channel member',
                 description: 'Remove a member from a channel',
             },
             
         ],
-        default: '',
+        default: 'createChannel',
     },
 ]
 
@@ -140,8 +140,8 @@ export const channelFields: INodeProperties[] = [
             },
         },
         default: '',
-        placeholder: `Enter the bot's unique name`,
-        description: `Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.`,
+        placeholder: 'Enter the bot\'s unique name',
+        description: 'Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.',
     },
     {
         displayName: 'Channel ID',
@@ -187,7 +187,7 @@ export const channelFields: INodeProperties[] = [
         placeholder: 'Enter a description for the channel',
     },
     {
-        displayName: 'Channel type',
+        displayName: 'Channel Type',
         name: 'level',
         type: 'options',
         required: true,
@@ -200,26 +200,26 @@ export const channelFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Organization - Anyone in your organization can access and join.',
+                name: 'Organization - Anyone in Your Organization Can Access and Join.',
                 value: 'organization'
             },
             {
-                name: 'Team - Only selected members of your organization group can access and join.',
+                name: 'Team - Only Selected Members of Your Organization Group Can Access and Join.',
                 value: 'team'
             },
             {
-                name: 'Personal - Only invited users from your organization can join',
+                name: 'Personal - Only Invited Users From Your Organization Can Join',
                 value: 'private'
             },
             {
-                name: 'External - Invited users from any organization can join',
+                name: 'External - Invited Users From Any Organization Can Join',
                 value: 'external'
             }
         ],
         default: 'private',
     },
     {
-        displayName: 'Select your teams',
+        displayName: 'Select Your Teams',
         name: 'teams',
         type: 'multiOptions',
         placeholder: "Select your teams",
@@ -234,11 +234,11 @@ export const channelFields: INodeProperties[] = [
         options: [],
         default: [],
         typeOptions: {
-            loadOptionsMethod: 'getTeams',
+            loadOptionsMethod: 'getTeamsWithoutCustom',
         },
     },
     {
-        displayName: "Email address",
+        displayName: 'Email Address',
         name: 'channelEmailIDs',
         placeholder: "Enter the email address of the user",
         type: 'string',
@@ -262,7 +262,7 @@ export const channelFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Set whether the channel is visible to everyone in the organization/ Team.',
+        description: 'Set whether the channel is visible to everyone in the organization/ Team',
     },
 
     {

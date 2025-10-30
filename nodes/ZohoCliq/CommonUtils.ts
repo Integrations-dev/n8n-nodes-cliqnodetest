@@ -108,6 +108,30 @@ export async function getTeamsList(this: ILoadOptionsFunctions) {
 	return teams;
 }
 
+export async function getTeamsListWithoutCustom(this: ILoadOptionsFunctions) {
+	const queryString: IDataObject = {
+		joined: 'true',
+	}
+
+	const responseData = (await CliqApiRequest.call(
+		this,
+		'GET',
+		'api/v2/teams',
+		{},
+		queryString,
+	));
+
+	console.log(responseData);
+
+	let teams = [];
+	teams = responseData.teams.map((team: { name: string; team_id: string }) => ({
+		name: team.name,
+		value: team.team_id,
+	}));
+
+	return teams;
+}
+
 export async function getChannelsList(this: ILoadOptionsFunctions) {
 	const queryString: IDataObject = {
 		joined: 'true',
