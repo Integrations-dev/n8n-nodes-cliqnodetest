@@ -137,34 +137,23 @@ export class ZohoCliq implements INodeType {
                     const cardIconURL = this.getNodeParameter('cardIconURL', i, '') as string;
                     const cardThumbnailURL = this.getNodeParameter('cardThumbnailURL', i, '') as string;
 
-                    let channel_id = "";
                     const queryString: IDataObject = {};
 
                     const botObject: IDataObject = {};
                     const cardObject: IDataObject = {};
 
-                    if (botName) {
-                        botObject.name = botName;
-                    }
+                    if (botName) botObject.name = botName;
+                    
 
-                    if (botIconURL) {
-                        botObject.image = botIconURL;
-                    }
+                    if (botIconURL) botObject.image = botIconURL;
+                    
 
                     if (cardTheme && cardTheme !== 'none') {
                         cardObject.theme = cardTheme;
 
-                        if (cardTitle) {
-                            cardObject.title = cardTitle;
-                        }
-
-                        if (cardIconURL) {
-                            cardObject.icon = cardIconURL;
-                        }
-
-                        if (cardThumbnailURL) {
-                            cardObject.thumbnail = cardThumbnailURL;
-                        }
+                        if (cardTitle) cardObject.title = cardTitle;
+                        if (cardIconURL) cardObject.icon = cardIconURL;
+                        if (cardThumbnailURL) cardObject.thumbnail = cardThumbnailURL;
                     }
 
 
@@ -173,25 +162,17 @@ export class ZohoCliq implements INodeType {
                         sync_message: sync,
                     };
 
-                    if (Object.keys(botObject).length > 0) {
-                        body.bot = botObject;
-                    }
+                    if (Object.keys(botObject).length > 0) body.bot = botObject;
+                    if (Object.keys(cardObject).length > 0) body.card = cardObject;
+                    
+                    let channel_id = customChannelId || channel;
 
-                    if (Object.keys(cardObject).length > 0) {
-                        body.card = cardObject;
-                    }
-
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
-                    if (botUniqueName) {
-                        queryString.bot_unique_name = botUniqueName;
-                    }
+                    if (botUniqueName) queryString.bot_unique_name = botUniqueName;
+                    
 
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels/${channel_id}/message`, body, queryString);
                     console.log(responseData);
@@ -212,51 +193,35 @@ export class ZohoCliq implements INodeType {
                     const botObject: IDataObject = {};
                     const cardObject: IDataObject = {};
 
-                    if (botName) {
-                        botObject.name = botName;
-                    }
+                    if (botName) botObject.name = botName;
+                    
 
-                    if (botIconURL) {
-                        botObject.image = botIconURL;
-                    }
+                    if (botIconURL) botObject.image = botIconURL;
+                    
 
                     if (cardTheme && cardTheme !== 'none') {
                         cardObject.theme = cardTheme;
 
-                        if (cardTitle) {
-                            cardObject.title = cardTitle;
-                        }
-
-                        if (cardIconURL) {
-                            cardObject.icon = cardIconURL;
-                        }
-
-                        if (cardThumbnailURL) {
-                            cardObject.thumbnail = cardThumbnailURL;
-                        }
+                        if (cardTitle)  cardObject.title = cardTitle;
+                        if (cardIconURL) cardObject.icon = cardIconURL;
+                        if (cardThumbnailURL) cardObject.thumbnail = cardThumbnailURL;
                     }
 
-                    let chat_id = "";
+                    
                     const body: IDataObject = {
                         text,
                         sync_message: sync,
                     };
 
-                    if (Object.keys(botObject).length > 0) {
-                        body.bot = botObject;
-                    }
-
-                    if (Object.keys(cardObject).length > 0) {
-                        body.card = cardObject;
-                    }
-
-                    if (customChatId) {
-                        chat_id = customChatId;
-                    } else if (chat) {
-                        chat_id = chat;
-                    } else {
+                    if (Object.keys(botObject).length > 0) body.bot = botObject;
+                    if (Object.keys(cardObject).length > 0) body.card = cardObject;
+                    
+                    let chat_id = customChatId || chat;
+                    
+                    if (!chat_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a chat or provide a chat ID.');
                     }
+
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/chats/${chat_id}/message`, body);
                     console.log(responseData);
                     returnData.push(responseData);
@@ -276,49 +241,31 @@ export class ZohoCliq implements INodeType {
                     const botObject: IDataObject = {};
                     const cardObject: IDataObject = {};
 
-                    if (botName) {
-                        botObject.name = botName;
-                    }
+                    if (botName) botObject.name = botName;
+                    
 
-                    if (botIconURL) {
-                        botObject.image = botIconURL;
-                    }
+                    if (botIconURL)  botObject.image = botIconURL;
+                    
 
                     if (cardTheme && cardTheme !== 'none') {
                         cardObject.theme = cardTheme;
 
-                        if (cardTitle) {
-                            cardObject.title = cardTitle;
-                        }
-
-                        if (cardIconURL) {
-                            cardObject.icon = cardIconURL;
-                        }
-
-                        if (cardThumbnailURL) {
-                            cardObject.thumbnail = cardThumbnailURL;
-                        }
+                        if (cardTitle) cardObject.title = cardTitle;
+                        if (cardIconURL) cardObject.icon = cardIconURL;
+                        if (cardThumbnailURL) cardObject.thumbnail = cardThumbnailURL;
                     }
 
-                    let email_Id = "";
+                    
                     const body: IDataObject = {
                         text,
                         sync_message: sync,
                     };
 
-                    if (Object.keys(botObject).length > 0) {
-                        body.bot = botObject;
-                    }
-
-                    if (Object.keys(cardObject).length > 0) {
-                        body.card = cardObject;
-                    }
-
-                    if (customEmailID) {
-                        email_Id = customEmailID;
-                    } else if (user) {
-                        email_Id = user;
-                    } else {
+                    if (Object.keys(botObject).length > 0) body.bot = botObject;
+                    if (Object.keys(cardObject).length > 0) body.card = cardObject;
+                    
+                    let email_Id = customEmailID || user;
+                    if (!email_Id)  {
                         throw new NodeOperationError(this.getNode(),'You must select a user or provide a email ID.');
                     }
 
@@ -347,7 +294,6 @@ export class ZohoCliq implements INodeType {
                     const messageId = this.getNodeParameter('messageId', i) as string;
                     const threadTitle = this.getNodeParameter('threadTitle', i) as string;
                     const postInParentChannel = this.getNodeParameter('postInChannel', i) as boolean;
-                    let channel_id = "";
                     const text = this.getNodeParameter('text', i) as string;
                     const sync = this.getNodeParameter('sync', i, false) as boolean;
 
@@ -361,35 +307,20 @@ export class ZohoCliq implements INodeType {
                     const botObject: IDataObject = {};
                     const cardObject: IDataObject = {};
 
-                    if (botName) {
-                        botObject.name = botName;
-                    }
-
-                    if (botIconURL) {
-                        botObject.image = botIconURL;
-                    }
+                    if (botName) botObject.name = botName;
+                    if (botIconURL) botObject.image = botIconURL;
+                    
 
                     if (cardTheme && cardTheme !== 'none') {
                         cardObject.theme = cardTheme;
 
-                        if (cardTitle) {
-                            cardObject.title = cardTitle;
-                        }
-
-                        if (cardIconURL) {
-                            cardObject.icon = cardIconURL;
-                        }
-
-                        if (cardThumbnailURL) {
-                            cardObject.thumbnail = cardThumbnailURL;
-                        }
+                        if (cardTitle) cardObject.title = cardTitle;
+                        if (cardIconURL) cardObject.icon = cardIconURL;
+                        if (cardThumbnailURL) cardObject.thumbnail = cardThumbnailURL;
                     }
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    let channel_id = customChannelId || channel;
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -401,13 +332,8 @@ export class ZohoCliq implements INodeType {
                         sync_message: sync,
                     };
 
-                    if (Object.keys(botObject).length > 0) {
-                        body.bot = botObject;
-                    }
-
-                    if (Object.keys(cardObject).length > 0) {
-                        body.card = cardObject;
-                    }
+                    if (Object.keys(botObject).length > 0) body.bot = botObject;
+                    if (Object.keys(cardObject).length > 0) body.card = cardObject;
 
                     const responseData = await CliqApiRequest.call(this, 'POST', `api/v2/channels/${channel_id}/message`, body);
                     console.log(responseData);
@@ -438,13 +364,10 @@ export class ZohoCliq implements INodeType {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+
+                    if (!channel_id)  {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -459,15 +382,9 @@ export class ZohoCliq implements INodeType {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    }
-                    else if (channel) {
-                        channel_id = channel;
-                    }
-                    else {
+                    if (!channel_id)  {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -482,13 +399,9 @@ export class ZohoCliq implements INodeType {
                     const botUniqueName = this.getNodeParameter('botUniqueName', i, '') as string;
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelUniquename = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_unique_name = "";
+                    let channel_unique_name = customChannelUniquename || channel;
 
-                    if (customChannelUniquename) {
-                        channel_unique_name = customChannelUniquename;
-                    } else if (channel) {
-                        channel_unique_name = channel;
-                    } else {
+                    if (!channel_unique_name) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -502,13 +415,9 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'archiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -518,13 +427,9 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'deleteChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -534,13 +439,9 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'unarchiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -550,13 +451,9 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'fetchChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
@@ -567,13 +464,9 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Team' && operation === 'fetchTeam') {
                     const team = this.getNodeParameter('team', i, '') as string;
                     const teamId = this.getNodeParameter('teamId', i, '') as string;
-                    let team_id = "";
+                    let team_id = teamId || team;
 
-                    if (teamId) {
-                        team_id = teamId;
-                    } else if (team) {
-                        team_id = team;
-                    } else {
+                    if (!team_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a team or provide a team ID.');
                     }
 
@@ -604,9 +497,8 @@ export class ZohoCliq implements INodeType {
                     const chat_id = customChatId ? customChatId : chat;
 
 
-                    if (!chat_id) {
-                        throw new NodeOperationError(this.getNode(),'You must select a chat or provide a chat ID.');
-                    }
+                    if (!chat_id) throw new NodeOperationError(this.getNode(),'You must select a chat or provide a chat ID.');
+                    
 
                     const body: IDataObject = {
                         id: messageId,
@@ -659,13 +551,9 @@ export class ZohoCliq implements INodeType {
                     const teams = this.getNodeParameter('teams', i, []) as string[];
                     const channelEmailIDs = this.getNodeParameter('channelEmailIDs', i, '') as string;
                     const visibility = this.getNodeParameter('visibility', i, false) as boolean;
-                    let channel_id = "";
+                    let channel_id = customChannelId || channel;
 
-                    if (customChannelId) {
-                        channel_id = customChannelId;
-                    } else if (channel) {
-                        channel_id = channel;
-                    } else {
+                    if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
 
