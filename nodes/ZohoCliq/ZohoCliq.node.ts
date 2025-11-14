@@ -19,8 +19,8 @@ import { teamFields, teamOperations } from './resources/TeamResource';
 
 export class ZohoCliq implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Zoho Cliq ( As Per In-App Content )',
-        name: 'zohoCliqInapp',
+        displayName: 'Zoho Cliq',
+        name: 'zohoCliq',
         icon: 'file:cliq.svg',
         group: ['transform'],
         version: 1,
@@ -165,7 +165,7 @@ export class ZohoCliq implements INodeType {
                     if (Object.keys(botObject).length > 0) body.bot = botObject;
                     if (Object.keys(cardObject).length > 0) body.card = cardObject;
                     
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -216,7 +216,7 @@ export class ZohoCliq implements INodeType {
                     if (Object.keys(botObject).length > 0) body.bot = botObject;
                     if (Object.keys(cardObject).length > 0) body.card = cardObject;
                     
-                    let chat_id = customChatId || chat;
+                    const chat_id = customChatId || chat;
                     
                     if (!chat_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a chat or provide a chat ID.');
@@ -264,7 +264,7 @@ export class ZohoCliq implements INodeType {
                     if (Object.keys(botObject).length > 0) body.bot = botObject;
                     if (Object.keys(cardObject).length > 0) body.card = cardObject;
                     
-                    let email_Id = customEmailID || user;
+                    const email_Id = customEmailID || user;
                     if (!email_Id)  {
                         throw new NodeOperationError(this.getNode(),'You must select a user or provide a email ID.');
                     }
@@ -319,7 +319,7 @@ export class ZohoCliq implements INodeType {
                         if (cardThumbnailURL) cardObject.thumbnail = cardThumbnailURL;
                     }
 
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
                     }
@@ -364,7 +364,7 @@ export class ZohoCliq implements INodeType {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
 
                     if (!channel_id)  {
@@ -382,7 +382,7 @@ export class ZohoCliq implements INodeType {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
                     const userEmails = this.getNodeParameter('userEmails', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id)  {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -399,7 +399,7 @@ export class ZohoCliq implements INodeType {
                     const botUniqueName = this.getNodeParameter('botUniqueName', i, '') as string;
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelUniquename = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_unique_name = customChannelUniquename || channel;
+                    const channel_unique_name = customChannelUniquename || channel;
 
                     if (!channel_unique_name) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -415,7 +415,7 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'archiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -427,7 +427,7 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'deleteChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -439,7 +439,7 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'unarchiveChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -451,7 +451,7 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Channel' && operation === 'fetchChannel') {
                     const channel = this.getNodeParameter('channel', i, '') as string;
                     const customChannelId = this.getNodeParameter('customChannelId', i, '') as string;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
@@ -464,7 +464,7 @@ export class ZohoCliq implements INodeType {
                 } else if (resource === 'Team' && operation === 'fetchTeam') {
                     const team = this.getNodeParameter('team', i, '') as string;
                     const teamId = this.getNodeParameter('teamId', i, '') as string;
-                    let team_id = teamId || team;
+                    const team_id = teamId || team;
 
                     if (!team_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a team or provide a team ID.');
@@ -551,7 +551,7 @@ export class ZohoCliq implements INodeType {
                     const teams = this.getNodeParameter('teams', i, []) as string[];
                     const channelEmailIDs = this.getNodeParameter('channelEmailIDs', i, '') as string;
                     const visibility = this.getNodeParameter('visibility', i, false) as boolean;
-                    let channel_id = customChannelId || channel;
+                    const channel_id = customChannelId || channel;
 
                     if (!channel_id) {
                         throw new NodeOperationError(this.getNode(),'You must select a channel or provide a channel ID.');
