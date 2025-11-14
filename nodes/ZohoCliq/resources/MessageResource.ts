@@ -39,13 +39,25 @@ export const messageOperations: INodeProperties[] = [
                 description: 'Send message to a user chat',
             },
             {
-                name: 'Create a thread',
+                name: 'Create a Thread',
                 value: 'Thread',
                 action: 'Create a thread',
                 description: 'Create a thread in a channel',
+            },
+            {
+                name: 'Update Thread State',
+                value: 'updateThreadState',
+                action: 'Update thread state',
+                description: 'Update the state of a thread (close/ reopen)',
+            },
+            {
+                name: 'Pin Message',
+                value: 'pinMessage',
+                action: 'Pin message',
+                description: 'Pin a message in a channel',
             }
         ],
-        default: '',
+        default: 'Channel',
     },
 ]
 
@@ -96,8 +108,8 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: '',
-        placeholder: `Enter the bot's unique name`,
-        description: `Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.`,
+        placeholder: 'Enter the bot\'s unique name',
+        description: 'Send a message in a channel as a bot. The bot must already be a participant in the channel. You can find the bot’s unique name in the bot’s API endpoint URL.',
     },
     {
         displayName: "User",
@@ -261,7 +273,7 @@ export const messageFields: INodeProperties[] = [
         placeholder: 'Enter card title',
     },
     {
-        displayName: 'Card thumbnail URL',
+        displayName: 'Card Thumbnail URL',
         name: 'cardThumbnailURL',
         type: 'string',
         displayOptions: {
@@ -275,7 +287,7 @@ export const messageFields: INodeProperties[] = [
         default: '',
     },
     {
-        displayName: 'Card icon URL',
+        displayName: 'Card Icon URL',
         name: 'cardIconURL',
         type: 'string',
         displayOptions: {
@@ -315,7 +327,7 @@ export const messageFields: INodeProperties[] = [
         default: '',
     },
     {
-        displayName: 'Post in parent channel',
+        displayName: 'Post in Parent Channel',
         name: 'postInChannel',
         type: 'boolean',
         displayOptions: {
@@ -325,7 +337,7 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'If enabled, the parent channel will be notified about this thread creation.',
+        description: 'If enabled, the parent channel will be notified about this thread creation',
     },
     {
         displayName: 'Sync Message',
@@ -338,6 +350,127 @@ export const messageFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: `If enabled, the Message ID will be returned in the response.`,
+        description: 'If enabled, the Message ID will be returned in the response',
+    },
+
+    {
+        displayName: 'Thread Chat ID',
+        name: 'threadChatId',
+        type: 'string',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['updateThreadState'],
+            },
+        },
+        default: '',
+        placeholder: 'Enter the thread chat ID',
+    },
+    {
+        displayName: 'Thread Status',
+        name: 'state',
+        type: 'options',
+        required: true,
+        placeholder: "Select the thread action",
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['updateThreadState'],
+            },
+        },
+        options: [
+            {
+                name: 'Close',
+                value: 'close',
+            },
+            {
+                name: 'Reopen',
+                value: 'reopen',
+            }
+        ],
+        default: 'close',
+    },
+
+    //Create Thread
+    {
+        displayName: 'Expiry Time',
+        name: 'expiryTime',
+        type: 'options',
+        placeholder: "Select a expiry time",
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['pinMessage'],
+            },
+        },
+        options: [
+            {
+                name: 'Forever',
+                value: "-1",
+            },
+            {
+                name: '1 Hour',
+                value: 3600000,
+            },
+            {
+                name: '2 Hours',
+                value: 7200000,
+            },
+            {
+                name: '4 Hours',
+                value: 14400000,
+            },
+            {
+                name: '8 Hours',
+                value: 28800000,
+            },
+            {
+                name: '12 Hours',
+                value: 43200000,
+            },
+            {
+                name: '1 Day',
+                value: 86400000,
+            },
+            {
+                name: '1 Week',
+                value: 604800000,
+            },
+            {
+                name: 'Custom',
+                value: 'custom',
+            }
+        ],
+        default: "-1",
+    },
+    {
+        displayName: 'Expiry Time in Milliseconds',
+        name: 'time',
+        type: 'string',
+        required: true,
+        placeholder: "Enter the expiry time",
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['pinMessage'],
+                expiryTime: ['custom']
+            },
+        },
+        default: '',
+    },
+    {
+        displayName: 'Notify Members',
+        name: 'notify',
+        type: 'boolean',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['Message'],
+                operation: ['pinMessage'],
+            },
+        },
+        default: false,
     },
 ]

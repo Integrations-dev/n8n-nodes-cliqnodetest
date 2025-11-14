@@ -16,37 +16,25 @@ export const userOperations: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Retrieve user data',
+                name: 'Retrieve User Data',
                 value: 'retrieveUser',
                 action: 'Retrieve user data',
                 description: 'Retrieve details of a specific user',
             },
             {
-                name: "Add user status",
+                name: 'Add User Status',
                 value: 'addUserStatus',
                 action: 'Add user status',
                 description: 'Add status for a user',
             },
             {
-                name: "Set user status",
+                name: "Set User Status",
                 value: 'setUserStatus',
                 action: 'Set user status',
                 description: 'Set status for a user',
             },
-            {
-                name: `Add channel members`,
-                value: 'addUsersToChannel',
-                action: `Add channel members`,
-                description: 'Add users to a channel',
-            },
-            {
-                name: 'Remove channel members',
-                value: 'removeChannelMember',
-                action: 'Remove channel member',
-                description: 'Remove a member from a channel',
-            },
         ],
-        default: '',
+        default: 'retrieveUser',
     },
 ]
 
@@ -131,7 +119,7 @@ export const userFields: INodeProperties[] = [
             }
         ],
         default: 'available',
-        description: `Select the status that represents the user's availability.`,
+        description: 'Select the status that represents the user\'s availability',
     },
     {
         displayName: 'Status Message',
@@ -146,7 +134,7 @@ export const userFields: INodeProperties[] = [
         },
         default: '',
         placeholder: 'Enter a custom status message',
-        description: `Enter a custom message to give more context about the user’s status.`,
+        description: 'Enter a custom message to give more context about the user’s status',
     },
 
     // Set a user status
@@ -167,22 +155,6 @@ export const userFields: INodeProperties[] = [
         typeOptions: {
             loadOptionsMethod: 'getUserStatuses',
         },
-    },
-
-    // Add/ Remove Users to Channel
-    {
-        displayName: 'Email IDs/ ZUIDs',
-        name: 'userEmails',
-        type: 'string',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['Users'],
-                operation: ['addUsersToChannel', 'removeChannelMember'],
-            },
-        },
-        default: '',
-        placeholder: 'zylker@zoho.com,tim.harrison@zylker.com'
     },
 
 ]
